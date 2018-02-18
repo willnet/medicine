@@ -12,5 +12,5 @@ def client
   }
 end
 
-response = client.push_message("<to>", message)
+response = client.push_message(ENV["USER_ID"], message)
 p response
