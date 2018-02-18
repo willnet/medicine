@@ -23,12 +23,18 @@ post '/callback' do
     when Line::Bot::Event::Message
       case event.type
       when Line::Bot::Event::MessageType::Text
-        replyable = %w(おけ うん のんだ 飲んだ のみました 飲みました).any? do |message|
+        ok = %w(おけ うん のんだ 飲んだ のみました 飲みました).any? do |message|
           event.message['text'].match? message
         end
 
-        message_text = if replyable
+        notyet = %w(まだ でない).any? do |message|
+          event.message['text'].match? message
+        end
+
+        message_text = if ok
           'えらいね！'
+        elsif notyet
+          '飲もう'
         else
           'どうしたの'
         end
