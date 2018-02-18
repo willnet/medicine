@@ -24,7 +24,7 @@ post '/callback' do
       case event.type
       when Line::Bot::Event::MessageType::Text
         replyable = %w(おけ うん のんだ 飲んだ のみました 飲みました).any? do |message|
-          message.match? event.message['text']
+          event.message['text'].match? message
         end
 
         message_text = if replyable
